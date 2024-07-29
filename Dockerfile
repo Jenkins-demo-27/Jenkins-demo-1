@@ -1,22 +1,19 @@
-# Use the official NGINX base image
-FROM nginx:latest
+version: '3.3'
 
-# Maintainer information
-LABEL maintainer="your-email@example.com"
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_DB=postgresdb
+      - POSTGRES_USER=cateinarecon
+      - POSTGRES_PASSWORD=recC8ina9876
+    ports:
+      - '5444:5432'
+    container_name: postgresdb
+    hostname: postgresdb
+    volumes:
+      - recon-postgres-keycloak-volnew1:/var/lib/postgresql/data
 
-# Install additional software
-RUN apt-get update && \
-    apt-get install -y curl vim && \
-    rm -rf /var/lib/apt/lists/*
-
-# Copy a custom NGINX configuration file
-COPY nginx.conf /etc/nginx/nginx.conf
-
-# Copy static website files to the appropriate directory
-COPY html/ /usr/share/nginx/html/
-
-# Expose the default NGINX port
-EXPOSE 80
-
-# Set the entry point to start NGINX
-CMD ["nginx", "-g", "daemon off;"]
+volumes:
+   recon-postgres-keycloak-volnew1:

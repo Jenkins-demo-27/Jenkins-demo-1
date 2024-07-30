@@ -1,15 +1,8 @@
-version: '3.3'
+version: '3.8'
 
 services:
-  db:
-    image: postgresjenkins
-    restart: always
+  web:
+    build: .
     ports:
-      - '5444:5432'
-    container_name: postgresdb
-    hostname: postgresdb
-    volumes:
-      - postgres-keycloak-volnew1:/var/lib/postgresql/data
+      - "5000:80"
 
-volumes:
-   postgres-keycloak-volnew1:
